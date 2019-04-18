@@ -1,0 +1,24 @@
+<!--page-->
+<script src="/static/uikit/js/uikit.min_2.27.2.js"></script>
+<script src="/static/uikit/src/js/components/pagination.js"></script>
+
+<ul class="uk-pagination">
+    <li><a href="?page={{ page.page_index|add:-1 }}">
+    <i class="uk-icon-angle-double-left"></i></a></li>
+
+    <li class="uk-pagination" data-uk-pagination="{items:{{page.item_count}},   itemsOnPage:{{page.page_size}},currentPage:{{page.page_index|add:-1}}}"></li>
+
+    <li><a href="?page={{ page.page_index|add:1 }}">
+    <i class="uk-icon-angle-double-right"></i></a></li>
+
+</ul>
+
+<script> 
+        var q = '{{q}}';
+        $('[data-uk-pagination]').on('select.uk.pagination', function(e, pageIndex){
+        pageIndex =pageIndex+1;
+        return location.assign('?page=' + pageIndex.toString() + '&q=' + q)
+                                     
+        });
+</script>
+<!--page end-->

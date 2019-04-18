@@ -1,0 +1,16 @@
+<link href="/static/home/css/btn.css" rel="stylesheet">
+{% if page >= 1 %}
+    <p>
+        {% for i in pageList %}
+            {% if i == '...' %}
+                <span>{{ i }}</span>
+            {% else %}
+                {% if i == page %}
+                    <a href="{{i}}{{queryString}}" class="btn btn-lg btn-primary">{{ i }}</a>
+                {% else %}
+                    <a href="{{i}}{{queryString}}" class="btn btn-lg btn-default">{{ i }}</a>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    </p>
+{% endif %}
