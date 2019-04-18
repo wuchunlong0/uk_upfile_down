@@ -1,0 +1,31 @@
+<!--dynamictag--><style>
+                        #qr-code-register{
+                            height: 232px;
+                        }
+                        .reg-cont .cont-box2{
+                            height: 322px;
+                            padding-top: 0;
+                        }
+                        #qr-code-register .qr-code{
+                            height: 120px;
+                            width: 120px;
+                            background: url('http://sta.ganji.com/public/image/v5/register_qr.png');//¶þÎ¬Âë
+                            margin: 0 auto;
+                        }
+                        #qr-code-register .title1{
+                            text-align: center;
+                            margin: 0 auto;
+                            font-size: 16px;
+                            line-height: 56px;
+                            font-family: arial, ËÎÌå;
+                            color: #010101;
+                        }
+                        #qr-code-register .title2{
+                            text-align: center;
+                            margin: 0 auto;
+                            font-size: 14px;
+                            color: #4b4b4b;
+                            line-height: 56px;
+                            font-family: arial, ËÎÌå;
+                        }
+                    </style>
