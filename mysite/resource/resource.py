@@ -93,7 +93,7 @@ def uploadfile(request):
                 size = sizeConvert(int(request.POST['upfilesize'])) #调用转换函数,获得B KB MB GB TB,                
         )
         upresources.save()        
-        upresources,page = _get_model_by_page(request,Upresources.objects.all(),PAGE_NUM) #每页显示page_size       
+        upresources,page,num = _get_model_by_page(request,Upresources.objects.all(),PAGE_NUM) #每页显示page_size       
         return  render(request, 'resource/showupresource.html', context=locals()) 
     return  render(request, 'resource/uploadfile.html', context=locals()) 
 
@@ -128,14 +128,6 @@ def search(request):
     
     upresources,page,num = _get_model_by_page(request,upresource_list,PAGE_NUM)
     return  render(request, 'resource/showupresource.html', context=locals()) 
-
-# def search(request):
-#     q = request.GET.get('q','') 
-#     if q:
-#         upresource_list = Upresources.objects.filter(title__icontains = q)
-#         upresources,page = _get_model_by_page(request,upresource_list,PAGE_NUM)
-#         return  render(request, 'resource/showupresource.html', context=locals()) 
-#     return HttpResponseRedirect('/resource/showupresource/') 
 
 #显示上传资源 http://localhost:8000/resource/showupresource/
 def showupresource(request): 
