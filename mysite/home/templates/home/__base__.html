@@ -30,27 +30,33 @@
         <div class="uk-margin">
             <nav class="uk-navbar">
                 <a class="uk-navbar-brand" href="/"><i class="uk-icon-home"></i> Home</a>  
+                <ul class="uk-navbar-nav"> 
+                    <li class="uk-parent uk-active " data-uk-dropdown>
+                        <a href="/resource/uploadfile/">上传 </a>
+                    </li>
+                </ul>
 
                 <ul class="uk-navbar-nav"> 
                     <li class="uk-parent uk-active " data-uk-dropdown>
-                        <a href="#"><i class="uk-icon-delicious"></i> 文件 </a>
+                        <a href="/resource/showupresource/">显示 </a>
+                    </li>
+                </ul>
+               
+                <ul class="uk-navbar-nav"> 
+                    <li class="uk-parent uk-active " data-uk-dropdown>
+                        <a href="#"> 下拉菜单 </a>
                         <div class="uk-dropdown uk-dropdown-navbar">
                             <ul class="uk-nav uk-nav-navbar">
-                                <li><a href="/resource/uploadfile/"> 上传文件 </a></li>
+                                <li><a href="/resource/uploadfile/">上传文件  </a></li>
                                 <li><a href=""> -------------------------- </a></li>
-                                
-                                
-                                <li><a href="/resource/downloadresourc/"> 显示 </a></li>
+                                 <li><a href="/resource/showupresource/">显 示  </a></li>
                                 <li><a href=""> -------------------------- </a></li>
-
-                        
+                                                     
                             </ul>
                         </div>
                     </li>
                 </ul>
                
-                
-
                 <div class="uk-navbar-flip">
                   <ul class="uk-navbar-nav">
                   {% if user.username %}
@@ -73,8 +79,8 @@
                     <div class="uk-navbar-content uk-navbar-flip">
                         <div class="uk-form uk-margin-remove uk-display-inline-block">
                           
-                            <input v-model="q"  style="width:200px;" placeholder="{{placeholder}}" > 
-                            <a class="uk-button uk-button-primary" v-bind:href="'{{search}}?q=' + q"><i class="uk-icon-search"></i></a> 
+                            <input v-model="q"  style="width:200px;" placeholder="  Search ..." > 
+                            <a class="uk-button uk-button-primary" v-bind:href="'/resource/search/?q=' + q"><i class="uk-icon-search"></i></a> 
                        
                         </div>  
                     </div>              
@@ -84,7 +90,6 @@
         </div>
         {% endblock %}
 
-    {% block content %} {% endblock %}
      
     {% if messages %} <!--messages消息 width:60px;-->
         <div  style="height:60px;width:972px;color:#f00;font-size:16px; padding-left:4px;padding-top:2px;background-color:#fff; border:1px solid #ccc;word-wrap:break-word; overflow:auto;overflow-y:auto;margin-left:76px;">           
@@ -94,7 +99,7 @@
         </div>
     {% endif %}
 
-    
+    {% block content %} {% endblock %}
 
     {% block footer %}
         <div class="uk-margin-large-top" style="background-color:#eee; border-top:1px solid #ccc;">

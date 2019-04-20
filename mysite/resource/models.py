@@ -27,22 +27,18 @@ class Upresources(models.Model):
     downnum= models.CharField(max_length = 8,blank=True, null=True)
     browsernum= models.CharField(max_length = 8,blank=True, null=True)
     size= models.CharField(max_length = 10,blank=True, null=True)
-    # 8小时前  2016-04-26 21:38回答
-    date= models.CharField(max_length = 22,blank=True, null=True)
-#    date= models.DateField(default=datetime.datetime.now,blank=True, null=True)
-#    date = models.DateField(default=datetime.datetime.now().strftime("%YYYY-%MM-%DD %H:%M:%S"),blank=True, null=True)
+    #格式 2019年4月19日 13:11
+    date = models.DateTimeField(default=datetime.datetime.now, null=True, blank=True) #年月日 时分秒
 
     def __str__(self):
-        return self.username
+        return self.title
 
 #评论资源
 class Commentresources(models.Model):
     username = models.ForeignKey(User, on_delete=models.PROTECT,blank=True, null=True)
     title = models.CharField(max_length = 120,blank=True, null=True)
     editor = models.CharField(max_length = 200,blank=True, null=True) 
-    date= models.CharField(max_length = 22,blank=True, null=True)
-#    date = models.DateField(default=datetime.datetime.now,blank=True, null=True)
-#    date = models.DateField(default=datetime.datetime.now().strftime("%YYYY-%MM-%DD %H:%M:%S"),blank=True, null=True)
+    date = models.DateTimeField(default=datetime.datetime.now, null=True, blank=True) #年月日 时分秒
     def __str__(self):
-        return self.username
+        return self.title
     

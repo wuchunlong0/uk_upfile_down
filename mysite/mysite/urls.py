@@ -2,7 +2,6 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.views.generic import RedirectView
-
 from django.views.generic import TemplateView, ListView, View
 class IndexView(TemplateView):
     template_name = 'home/index.html'

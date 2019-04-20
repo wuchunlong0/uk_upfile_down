@@ -1,0 +1,203 @@
+{% extends 'home/__base__.html' %}
+{% block content %} 
+<link rel="stylesheet" href="/static/resource_min/css/details.css" />       
+
+ <!-- crumb end -->
+    <div style="float:right;">
+        <!-- aside -->
+        <aside id="aside">
+            <div class="aside-list upload-tips" style="width:200px;float:right;">
+                <header class="hd"><h2>信息统计</h2></header>
+                <div class="bd" >
+                    <dl>
+                        <dt>评论数:</dt>
+                        <dd>
+                            <p> {{num}}个.</p>
+                        </dd>
+                    </dl>
+                    
+                </div>
+            </div>
+        </aside>
+</div>
+
+
+<div id="container" style="margin-left:-200px;margin-top:-15px">
+    <div class="wrap">
+        <aside id="aside">
+            <a href="/resource/uploadfile/" class="btn btn-def w-full upload-btn ">
+            <i class="uk-icon-upload">&nbsp;&nbsp;</i>上传资源</a>
+
+            <!--左边模块-->
+            {% include 'home/nav-menu.html' %}
+            
+        </aside> 
+
+        {% if user.is_superuser or 'Operator' in groups  %}
+
+        <!-- main -->
+        <article id="main">
+            <header class="caption">
+                <h1> {{upresources.0.title}} </h1>              
+            </header>
+            <!-- attr -->
+            <div class="details-attr">
+                <h2> username:{{upresources.0.username}} </h2>
+                <div class="wrap">
+                    <!-- group -->
+                    <div class="group">
+                        <dl>
+                            <dt>{{upresources.0.type}}：</dt>
+                            <dd>
+                                {{upresources.0.cid1}}
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>更新：</dt>
+                            <dd>{{upresources.0.date}}</dd>
+                        </dl>
+                                                <dl>
+                            <dt>运行环境：</dt>
+                            <dd>
+                                {{upresources.0.environment}}     
+                            </dd>
+                        </dl>
+                                            </div>
+                    <!-- group end -->
+                    <!-- group -->
+                    <div class="group">
+                        <dl>
+                            <dt>来源：</dt>
+                            <dd>{{upresources.0.source}} </dd>
+                        </dl>
+                        <dl>
+                            <dt>大小：</dt>
+                            <dd>{{upresources.0.size}}</dd>
+                        </dl>
+                        <dl>
+                            <dt>下载：</dt>
+                            <dd>{{upresources.0.downnum}}次</dd>
+                        </dl>
+                    </div>
+                    
+                    <div class="group btns">
+                        <a href="/resource/downFile/?uploadfile={{upresources.0.uploadfile}}"  class="btn btn-def xl w-lg">
+                        <i class="uk-icon-download">&nbsp;&nbsp;</i>下载</a>
+                    </div>
+                    <!-- group end -->
+                    <dl class="details-tag" >
+                        <dt>标签：</dt>
+                        <dd>
+                            <ul class="resource-tag">
+                            <li><a href="#" title="" target="_blank">{{upresources.0.label}}</a></li>
+                            <li><a href="#" title="" target="_blank"></a></li>
+                            </ul>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <!-- attr end -->
+
+
+            <header class="caption">
+                <h2>介绍</h2>
+            </header>
+            <!-- article -->
+            <div class="article editor-style">
+                <p>
+                <p>{{upresources.0.editor|safe}}
+                <br></p>  
+                </p>
+            </div>
+
+            <!-- article end -->
+            <header class="caption">
+                <h2>效果图</h2>
+            </header>
+            <!-- article -->
+            <div class="article  ">
+             <img src="{{upresources.0.uploadimg}}" alt="" />   
+                <br><br>  
+            </div>
+            <!-- article end -->
+
+    
+            <!-- recommend -->
+            <div class="recommend theme-primary">
+                <header><h2>相关推荐</h2></header>
+                <div class="bd">
+                    <ul>
+                        <li><a href="#">HTML5跳动的心-送给妹纸</a>
+                        </li>   
+                    </ul>
+                </div>
+            </div>
+            <!-- recommend end -->
+
+            <!-- comment -->
+            <header class="comment-caption">
+                <h2>评论列表</h2>
+            </header>
+
+            <ul class="comment-list">
+                {% for comment in comments %}
+                <li>
+                    <!-- comment-item -->
+                    <div class="comment-item">
+                        <dl>
+                            <dt>
+                            <div class="picture">
+                                <div class="img-wrap">
+                                    <img src="/static/img/child.jpeg" alt="50x50"  data-holder-rendered="true" style="width: 50px; height: 50px;">
+                                </div>
+                            </div>
+                            </dt>
+                            <dd>
+                                <h4>{{comment.username}} </h4>
+                                <h5>{{comment.date}} </h5>
+                                <p><p>{{comment.editor|safe}}</p></p>
+                            </dd>
+                        </dl>
+                        <div class="comment-floor">{{forloop.counter}}楼</div>
+                    </div>
+                    <!-- comment-item end -->
+                </li>
+                {% endfor %}
+            </ul>
+
+            <!--page-->
+            {% include 'home/page.html' %}
+            <br>
+            <form action="/resource/upcomment/" name="upForm" method="post" class="form form-issue"  autocomplete="off" enctype ="multipart/form-data" required >
+                {% csrf_token %}
+                <input type="text" name="title" id="title" value="{{upresources.0.title}}" style='display:none'>
+                <span>
+                    <textarea name="editor" id="editor" ng-model="editor" required style="width:780px;height:100px; " placeholder="在此填写评论..." >
+                    </textarea>
+                    <input type="submit" class="btn btn-def" id="commentBtn" value="提交" style="margin-left:680px; margin-top:1px;"/>
+                </span>
+
+            </form>
+     
+        </article>
+ 
+        {% else %}      
+            <div  style="color:#3ACC3A;font-size:14px;">&nbsp;&nbsp;&nbsp;&nbsp;抱歉！您尚未登录，~快
+            <a href='/login/'> 登录 </a> 吧！如果您还没有账号您可以
+            <a href='/home/register/'> 注册 </a> 一个账号
+          </div>       
+        {% endif %}
+
+    </div>
+</div>
+<!-- container end -->
+<!--编辑器插件-->
+<link rel="stylesheet" href="/static/resource_min/css/simditor.css"/>
+<script src="/static/resource_min/js/module.js"></script>
+<script src="/static/resource_min/js/hotkeys.js"></script>
+
+<script src="/static/resource_min/js/simditor.js"></script>
+<script src="/static/resource_min/js/editor1.js"></script><!--可以更改编辑器提示信息-->
+<script src="/static/resource_min/js/ques.common.js"></script>
+
+{% endblock %}

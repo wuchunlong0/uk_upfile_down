@@ -14,140 +14,168 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from myAPI.pageAPI import Page ,_get_model_by_page
 from myAPI.convertAPI import sizeConvert
-from myAPI.myFile import MyFile,WriteFile,searchTxt,GetTxtfile,toDict
+from myAPI.myFile import MyFile,WriteFile,searchTxt,GetTxtfile 
 from myAPI.fileAPI import GetfileLineTxt
 from myAPI.download import downLoadFile
 from django.contrib.auth.models import User
+PAGE_NUM = '3' #设置每页显示数
 
 # http://localhost:8000/resource/test/
 def test(request):
     print('===='+os.getcwd()) #当前目录/Users/wuchunlong/local/wcl6005/Project-Account-Online/mysite
     return HttpResponse('ok') 
+
+#保存上传文件
+def save_upfile(filepath,mode):
+    destination = open(os.path.join(filepath,mode.name),'wb+')  # 打开特定的文件进行二进制的写操作  
+    for chunk in mode.chunks():  # 分块写入文件  
+        destination.write(chunk)  
+    destination.close() 
+
 #Admin用户，才能上传资源写入数据库 http://localhost:8000/resource/uploadfile/
 # 前台验证：先判断资源upfile、图像upImg二个文件文件大小是否超过阀值，再判断第二个文件扩展名是否合法。
 # 后台验证：判断title、uploadfile两个字段是否有相同的记录。
 #注意：图像数据库中保存的文件名与保存文件的文件名，路径有区别。
 @login_required
-def uploadfile(request):
-    PATH = os.getcwd()
-    UP_PATH = '/static_common/upload/'   
-    filepath = PATH + UP_PATH +'upfile/'#设置保存资源文件路径
-    imgpath =  PATH + UP_PATH +'upimg/'#设置保存图像文件路径        
-    page_size = '10' #设置每页显示数
+def uploadfile(request):   
+    PATH = '{}/static_common/upload/'.format(os.getcwd()) 
+    filepath = PATH +'upfile/'#设置保存资源文件路径
+    imgpath =  PATH +'upimg/'#设置保存图像文件路径        
+
     groups = request.user.groups.values_list('name',flat=True)
     if not (request.user.is_superuser or 'Operator' in groups):
-        return HttpResponseRedirect('/login/')        
-    if request.method == 'POST':
+        return HttpResponseRedirect('/login/') 
+           
+    q = request.GET.get('q','') 
+    if q != '': 
+        return  HttpResponseRedirect('/resource/search/')
+   
+    if request.method == 'POST':       
+        Myfile = request.FILES.get("upfile", None)    # 获取上传的文件，如果没有文件，则默认为None  
+        if not Myfile:
+            messages.info(request, '警告：没有获得上传文件!')
+            return HttpResponseRedirect('/resource/uploadfile/')        
+        MyImg =request.FILES.get("upImg", None)     
+        if not MyImg:
+            messages.info(request, '警告：没有获得上传图像!')
+            return HttpResponseRedirect('/resource/uploadfile/')  
+                
         title = request.POST['title']
         istitle = Upresources.objects.filter(title = title)
         if istitle:  #判断title是否有相同的记录
-            messages.info(request, 'Title is already in use.')
+            messages.info(request, '警告：资源标题 - {} 重复! 请更换资源标题。'.format(title))
             return HttpResponseRedirect('/resource/uploadfile/')        
-        Myfile =request.FILES.get("upfile", None)    # 获取上传的文件，如果没有文件，则默认为None  
-        if not Myfile:
-            messages.info(request, 'no Myfile for upload!')
-            return HttpResponseRedirect('/resource/uploadfile/')
+                
         uploadfile = filepath + Myfile.name
         isuploadfile = Upresources.objects.filter(uploadfile = uploadfile)         
         if isuploadfile:  #判断uploadfile是否有相同的记录
-            messages.info(request, 'uploadfile is already in use.')
+            messages.info(request, '警告：上传文件 - {} 文件已经上传!'.format(Myfile.name))
             return HttpResponseRedirect('/resource/uploadfile/')        
-
-        destination = open(os.path.join(filepath,Myfile.name),'wb+')  # 打开特定的文件进行二进制的写操作  
-        for chunk in Myfile.chunks():  # 分块写入文件  
-            destination.write(chunk)  
-        destination.close() 
-
-        MyImg =request.FILES.get("upImg", None)    # 获取上传的文件，如果没有文件，则默认为None  
-        if not MyImg:
-            messages.info(request, 'no MyImg for upload!')
-            return HttpResponseRedirect('/resource/uploadfile/')  
-              
-        destination = open(os.path.join(imgpath,MyImg.name),'wb+')  # 打开特定的文件进行二进制的写操作  
-        for chunk in MyImg.chunks():  # 分块写入文件  
-            destination.write(chunk)  
-        destination.close() 
         
+        # 保存上传文件
+        save_upfile(filepath,Myfile)
+        save_upfile(imgpath,MyImg) 
+                     
         # 写入数据库
-        upresources=Upresources(
+        upresources = Upresources(
                 uploadfile = uploadfile, # filepath + Myfile.name,#数据库保存包含路径的文件名     
                 uploadimg = '/static/upload/upimg/' + MyImg.name,#数据库保存包含路径的文件名     
                 username = request.user, #登录用户,
                 title = title,
                 editor = request.POST['editor'],
-                source= request.POST['source'],
-                type= request.POST['type'],
-                cid1= request.POST['cid1'],
-                environment= request.POST['environment'],
-                label= request.POST['tag'],
-                downnum= '0',
-                browsernum= '0',
-                size= sizeConvert(int(request.POST['upfilesize'])), #调用转换函数,获得B KB MB GB TB,
-                date = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
-                #= datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")[0:-3]
-            )
+                source = request.POST['source'],
+                type = request.POST['type'],
+                cid1 = request.POST['cid1'],
+                environment = request.POST['environment'],
+                label = request.POST['tag'],
+                downnum = '0',
+                browsernum = '0',
+                size = sizeConvert(int(request.POST['upfilesize'])) #调用转换函数,获得B KB MB GB TB,                
+        )
         upresources.save()        
-        upresourceLD = [toDict(u) for u in Upresources.objects.all()]
-        upresources,page = _get_model_by_page(request,upresourceLD,page_size) #每页显示page_size       
-        return  render(request, 'resource/download.html', context=locals()) 
+        upresources,page = _get_model_by_page(request,Upresources.objects.all(),PAGE_NUM) #每页显示page_size       
+        return  render(request, 'resource/showupresource.html', context=locals()) 
     return  render(request, 'resource/uploadfile.html', context=locals()) 
 
-#分词搜索数据库Upresources的title标题字段，以列表字典形式获得记录 2017.6.3
-def searchUpresourcesTitle(q):
-    myList = []
-    qlists = list(jieba.cut(q, cut_all = True)) #q中文分词
-    for qs in qlists:
-        dataDB = Upresources.objects.filter(title=qs)
-        if dataDB: myList += [toDict(u) for u in dataDB] #获得列表字典形式数据库记录
-    return listdictSet(myList) #列表字典去掉重复元素（记录）    
+#   http://localhost:8000/resource/search/
+def search(request):
+    model = Upresources
+    title = request.GET.get('q','')
+    type = request.GET.get('type','')
+    date = request.GET.get('date','')
+    browsernum = request.GET.get('browsernum','')
+    downnum = request.GET.get('downnum','')
+    
+    fieldname = '全部资源'
+    upresource_list = model.objects.all()
+    if title:
+        fieldname = '类型: %s'%title
+        upresource_list = model.objects.filter(title__icontains = title)
+    if type:
+        fieldname = '类型: %s'%type                    
+        upresource_list = model.objects.filter(type__icontains = type)
+    if date:
+        fieldname = '更新时间排序'
+        upresource_list = model.objects.order_by('-date')
+    if browsernum:
+        fieldname = '查看次数排序'
+        list=model.objects.extra(select={'num':'browsernum+0'})
+        upresource_list=list.extra(order_by=["-num"]) 
+    if downnum:
+        fieldname = '按下载次数排序'
+        list=model.objects.extra(select={'num':'downnum+0'})
+        upresource_list=list.extra(order_by=["-num"]) 
+    
+    upresources,page,num = _get_model_by_page(request,upresource_list,PAGE_NUM)
+    return  render(request, 'resource/showupresource.html', context=locals()) 
+
+# def search(request):
+#     q = request.GET.get('q','') 
+#     if q:
+#         upresource_list = Upresources.objects.filter(title__icontains = q)
+#         upresources,page = _get_model_by_page(request,upresource_list,PAGE_NUM)
+#         return  render(request, 'resource/showupresource.html', context=locals()) 
+#     return HttpResponseRedirect('/resource/showupresource/') 
+
+#显示上传资源 http://localhost:8000/resource/showupresource/
+def showupresource(request): 
+    fieldname = '全部资源'
+    upresources,page,num = _get_model_by_page(request,Upresources.objects.all(),PAGE_NUM)
+    return  render(request, 'resource/showupresource.html', context=locals()) 
 
 
-#显示资源 http://localhost:8000/resource/downloadresourc/
-def downloadresourc(request):
-    page_size = '10' #设置每页显示数
-    q = request.GET.get('q','')   
-    upresources,page = _get_model_by_page(request,Upresources,page_size)\
-    if q == '' else  _get_model_by_page(request,searchUpresourcesTitle(q), page_size)
-    login = '/resource/downloadresourc/'
-    placeholder = u"搜索Upresource_标题title"
-    return  render(request, 'resource/download.html', context=locals()) 
-
-#显示资源、详情数据库   http://localhost:8000/resource/showdetails/
-def showdetails(request):
-    page_size = '10' #设置每页显示数
+#显示资源评论   http://localhost:8000/resource/showcomment/
+def showcomment(request):
     title = request.GET.get('title','') #由标题获得记录
     if title != '':
-        browsernum=Upresources.objects.get(title = str(title)).browsernum      
+        browsernum = Upresources.objects.get(title = str(title)).browsernum      
         browsernum = int(browsernum) + 1
-        Upresources.objects.filter(title = title).update(browsernum = browsernum)       
-        upresources = [toDict(u) for u in Upresources.objects.filter(title = title)]       
-        myListDict = [toDict(u) for u in Commentresources.objects.all()]
-        #print myListDict
-        comments,page = _get_model_by_page(request,myListDict,page_size) #每页显示page_size
-    return  render(request, 'resource/detail.html', context=locals()) 
+        Upresources.objects.filter(title = title).update(browsernum = browsernum)        
+        upresources =  Upresources.objects.filter(title = title)
+        comment_list =  Commentresources.objects.filter(title = title)     
+        comments,page,num = _get_model_by_page(request,comment_list,PAGE_NUM) #每页显示page_size
+    return  render(request, 'resource/showcomment.html', context=locals()) 
 
-
-#评论资源写入数据库   http://localhost:8000/resource/Commentresource/ 
-def Commentresource(request):
+#评论资源写入数据库   http://localhost:8000/resource/upcomment/ 
+def upcomment(request):
     if request.method == 'POST':
         title = request.POST['title'] 
         commentresources = Commentresources(
-            username = request.user, #登录用户
+            username = request.user, 
             title = title,
-            editor = request.POST['editor'], 
-            date = datetime.datetime.now().strftime("%Y-%m-%d %H:%M"))
+            editor = request.POST['editor']
+        ) 
         commentresources.save() 
-        return HttpResponseRedirect('/resource/showdetails/?title=' + title)
-    return  render(request, 'resource/detail.html', context=locals()) 
+        return HttpResponseRedirect('/resource/showcomment/?title=%s' % (title))
+    return  render(request, 'resource/showupresource.html', context=locals()) 
 
 #下载资源 http://localhost:8000/resource/downFile/
 def downFile(request):
-    uploadfile = request.GET.get('uploadfile','')
-    print(uploadfile)   
+    uploadfile = request.GET.get('uploadfile','')  
     if uploadfile != '':
         downLoad = downLoadFile(uploadfile)
-        downnum=Upresources.objects.get(uploadfile = uploadfile).downnum #必须确保uploadfile字段 不重名！     
+        downnum = Upresources.objects.get(uploadfile = uploadfile).downnum #必须确保uploadfile字段 不重名！     
         downnum = int(downnum) + 1
         Upresources.objects.filter(uploadfile = uploadfile).update(downnum = downnum)      
         return downLoad        
-    return HttpResponseRedirect('/resource/downloadresourc/')
+    return HttpResponseRedirect('/resource/showupresource/')

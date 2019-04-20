@@ -85,10 +85,9 @@ def checkcodeGIF(request):
     return  HttpResponse(codeImg, img_type)
     
 def getcheckcode(request):
-    print('w'*30)
     g_checkcode = gcheckcode(request)
     path = request.GET.get('path','')
     if not path:
         return HttpResponseRedirect('/home/register/')        
     return  render(request, path, context=locals()) 
-    return  HttpResponseRedirect(path)
+

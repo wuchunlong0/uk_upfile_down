@@ -1,0 +1,210 @@
+{% extends 'home/__base__.html' %}
+{% block content %}
+<head>
+    <link rel="stylesheet" href="/static/resource_min/css/common.min.css" >
+    <script src="/static/resource_min/js/wcl6005.file.js"></script>
+    <link rel="stylesheet" href="/static/resource_min/css/common.css" >
+   
+</head>
+
+<body onload='onload()'>
+<div class="wrapper">
+ 
+  
+<script>
+    function onload(){
+        //alert('ok');
+        var fsizeset1 = 209715200;  //设定文件大小阀值200M(1MB =1024*1024=1048576 )
+        document.getElementById('upfsizedisp1').innerHTML ="上传文件不得大于: "+SizeConvert(fsizeset1);//加载网页时就运行，并调用js函数SizeConvert(setfilesize) 显示设定文件大小
+        var fsizeset2 = 1048576;  //设定文件大小阀值1M(1MB =1024*1024=1048576 )
+        document.getElementById('upfsizedisp2').innerHTML ="上传文件不得大于: "+SizeConvert(fsizeset2);//加载网页时就运行，并调用js函数SizeConvert(setfilesize) 显示设定文件大小
+
+    }
+</script>  
+
+  <!-- container -->
+  <div id="container">
+
+    <!-- crumb end -->
+    <div class="wrap aside-right">
+        <!-- aside -->
+        <aside id="aside">
+            <div class="aside-list upload-tips">
+                <header class="hd"><h2>上传资源提醒</h2></header>
+                <div class="bd">
+                    <dl>
+                        <dt>标题</dt>
+                        <dd>
+                            <p>请在标题中描述内容要点，让其他人看到标题就清楚的了解你想要表达的内容。</p>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>正文</dt>
+                        <dd>
+                            <p>可以在正文中为你要发布的主题添加更多细节，让内容更有可读性。</p>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>选择标签</dt>
+                        <dd>
+                            <p>请为你的主题选择或自定义至少一个标签，恰当的归类会让你发布的信息更有价值。</p>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>上传资源</dt>
+                        <dd>
+                            <p>上传的资源需与主题内容相符合，若发现不符合，内容将被删除。</p>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </aside>
+        <!-- aside end -->
+        <!-- main -->
+        <div id="main">
+        
+
+            <form action="#" name="upForm" method="post" class="form form-issue" autocomplete="off" enctype="multipart/form-data" required onsubmit="return istwofile(209715200,1048576)">
+
+                {% csrf_token %}              
+                
+                <fieldset>
+                    <div class="form-group">
+                        <span style="color:#0AA20A">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp请选择一个压缩资源文件。确认上传后，将不可修改和删除。</span> 
+                         <span  id="upfsizedisp1" style="color:#0AA20A"></span>  </br>
+                        <div class="form-item">
+                            <div class="item-label">资源文件</div>
+                            <div class="item-cont">
+                                <input class="btn btn-def" name="upfile" id="upfile" ng-model="upfile" required  type="file" >
+                                <span style="color:red">{{messize }}</span>
+                                <!--js提示-->
+                                <div id="upfiledisp" style="color:#f00"> </div>
+
+                            </div>
+                        </div>
+                        <span style="color:#0AA20A">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp请选择一个效果图(.jpg)文件。确认上传后，将不可修改和删除。</span>  
+                        <span  id="upfsizedisp2" style="color:#0AA20A"></span>  </br>
+                        <div class="form-item">
+                            <div class="item-label">效果图像</div>
+                            <div class="item-cont">
+                                <input class="btn btn-def" name="upImg" id="upImg" ng-model="upImg" required  type="file" >
+                                <span style="color:red">{{ message }}</span>
+                                <!--js提示-->
+                                <div id="upImgdisp" style="color:#f00"> </div>
+                            </div>
+
+                        </div>
+
+                        <!--隐形传递下列参数 style="display:none" -->
+                        <!--input   type='text' name='username' value="username" style="display:none"-->
+
+
+                        <!--id="upfilesize"从JS document.getElementById("upfilesize").value来，获得value值-->
+                        <input   name="upfilesize" id="upfilesize"  type="text"  style="display:none">
+
+                        <div class="form-item">
+                            <div class="item-label">资源标题</div>
+                            <div class="item-cont">
+                                <input name="title" ng-model="title" required value="" type="text" class="txt w-xl" id="articleTitle" placeholder="标题不得重复,最多120字符"  maxlength="120">
+                 
+                            </div>
+                        </div>
+
+                        <!--调用标签模块-->
+                        <div class="form-item" id="formtag" style="">
+                            <div class="item-label">资源标签</div>
+                            <div class="item-cont">
+                                <!--调用标签模块-->
+                                {% include 'home/tag.html' %}
+                                
+                            </div>
+                        </div>
+
+
+                        <div class="form-item">
+                            <div class="item-label">资源类型</div>
+                            <div class="item-cont">
+                                <select name="type" id="resourceType" ng-model="type" required>
+                                    <option value="">选择类型</option>
+                                    <option value="源码">源码</option>
+                                    <option value="教程">教程</option>
+                                    <option value="文档/电子书">文档/电子书</option>
+                                    <option value="工具/软件">工具/软件</option>
+                                    <option value="其他">其他</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-item">
+                            <div class="item-label">所属分类</div>
+                            <div class="item-cont">
+                                <select name="cid1" id="classify_1" ng-model="cid1" required>
+                                    <option value="">选择分类</option>
+                                    <option value="移动开发">移动开发</option>
+                                    <option value="前端开发">前端开发</option>
+                                    <option value="后端开发">后端开发</option>
+                                    <option value="基础知识">基础知识</option>
+                                    <option value="云计算&amp;大数据">云计算&amp;大数据</option>
+                                    <option value="数据库">数据库</option>
+                                    <option value="认证考试">认证考试</option>
+                                    <option value="设计&amp;产品&amp;测试">设计&amp;产品&amp;测试</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-item">
+                            <div class="item-label">资源来源</div>
+                            <div class="item-cont">
+                                <select name="source" id="source" ng-model="source" required >
+
+                                    <option value="">选择来源</option>
+                                    <option value="转载">转载</option>
+                                    <option value="原创">原创</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <div class="form-item" id="formEnvironment" style="">
+                            <div class="item-label">运行环境</div>
+                            <div class="item-cont">
+                                <select name="environment" id="environment" ng-model="environment" required >
+                                    <option value="">选择运行环境</option>
+                                    <option value="windows">windows</option>
+                                    <option value="linux">linux</option>
+                                    <option value="osx">osx</option>
+                                    <option value="Android">Android</option>
+                                    <option value="其他">其他</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <textarea name="editor" id="editor" ng-model="editor" required></textarea>
+
+                <span class="editor" id="editorBox" > 
+                   <input type="submit" class="btn btn-def" id="commentBtn" value="提交" style="margin-left: 588px; margin-top:1px; "/>
+                </span>
+            </form>
+
+        
+
+        </div>
+        <!-- main end -->
+        <!--编辑器插件-->
+        <link rel="stylesheet" href="/static/resource/css/simditor.css"/>
+        <script src="/static/resource/js/module.js"></script>
+        <script src="/static/resource/js/hotkeys.js"></script>
+        <script src="/static/resource/js/uploader.js"></script>
+        <script src="/static/resource/js/simditor.js"></script>
+        <script src="/static/resource/js/editor1.js"></script><!--可以更改编辑器提示信息-->
+        <script src="/static/resource/js/ques.common.js"></script>
+        <!--end 编辑器插件-->
+
+    </div>
+  </div>
+  <!-- container end -->
+
+</div>
+</body>
+{% endblock %}

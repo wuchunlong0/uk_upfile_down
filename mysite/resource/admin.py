@@ -7,9 +7,9 @@ from . models import Upresources, Commentresources
  
 @admin.register(Upresources)
 class UpresourcesAdmin(admin.ModelAdmin):    
-    list_display = ('id','username','uploadfile','date')
+    list_display = ('id','username','title','uploadfile','date')
  
  
 @admin.register(Commentresources)
 class CommentresourcesAdmin(admin.ModelAdmin):    
-    list_display = ('id','username','date')
+    list_display = ('id','username','title','date')

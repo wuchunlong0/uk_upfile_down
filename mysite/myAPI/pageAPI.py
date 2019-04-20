@@ -172,16 +172,16 @@ def _get_model_values_page(request,model, listRow):#add
         return [],1
 
         
-# model支持数据库对象、列表字典对象
+# model支持数据库对象、列表字典对象 重构：2019.04.19
 def _get_model_by_page(request,model, listRow):#add
     try:
-        if not isinstance(model,list):
-            model = model.objects.all()
-        page=Page(len(model),_get_page_index(request),_get_listRows(request,listRow), 3)#3个按钮
-        model=model[page.offset : page.offset + page.limit]
-        return model,page
+        num = len(model)
+        page = Page(num,_get_page_index(request),_get_listRows(request,listRow), 3)#3个按钮
+        model = model[page.offset : page.offset + page.limit]
+        return model,page,num
     except:
         return [],1
+    
 
 def _get_page_index(request):
     pageIndex = int(request.GET.get('page', '1'))
