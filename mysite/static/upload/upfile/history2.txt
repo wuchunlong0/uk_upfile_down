@@ -1,0 +1,583 @@
+1、迭代器实例
+2、装饰器实例
+
+
+584  git st
+  585  git diff
+  586  git st
+  587  ./start.sh 
+  588  git st
+  589  git co edustack/__init__.py
+  590  git st
+  591  ./start.sh 
+  592  ./start.sh 
+  593  ./start.sh 
+  594  ./start.sh 
+  595  git st
+  596  git diff
+  597  git add edustack/messageBoard/
+  598  git st
+  599  git ci -a -m 'init edustack/messageBoard'
+  600  git push
+  601  fab -c fabricrc deploy
+  602  history 
+  603  ls
+  604  touch a.txt
+  605  git st
+  606  rm a.txt 
+  607  git st
+  608  pwd
+  609  history  
+
+29  cd ..
+   30  cd ..
+   31  ls
+   32  cd ..
+   33  ls
+   34  cd ..
+   35  ls
+   36  mkdir Flask
+   37  ls
+   38  ls
+   39  mkdir flask
+   40  ls
+   41  mddir myflask
+   42  mkdir myflask
+   43  cd myflask
+   44  ls
+   45  ls
+   46  cd myflas
+   47  ls
+   48  cd ..
+   49  ls
+   50  cd myflask
+   51  ls
+   52  ls
+   53  touch helloworld.py
+   54  ls
+   55  python helloworld.py
+   56  s
+   57  ls
+   58  start
+   59  start.bat
+   60  ls
+   61  start.bat
+   62  python run.py
+   63  ./start.bat
+   64  ./
+   65  ls
+   66  cd 
+   67  ls
+   68  cd local/
+   69  ls
+   70  cd github/
+   71  ls
+   72  cd abbytraining/
+   73  ls
+   74  ./start.sh 
+   75  ./run_test.sh 
+   76  ./run_test.sh 
+   77  ./run_test.sh 
+   78  ./run_test.sh 
+   79  ./run_test.sh 
+   80  pwd
+   81  ls
+   82  cd frontend
+   83  ls
+   84  brew install node
+   85  npm install
+   86  npm install
+   87  npm install
+   88  npm install phantomjs
+   89  ls
+   90  cd ..
+   91  ls
+   92  cat start.sh 
+   93  pwd
+   94  ls
+   95  cat start.bat 
+   96  cat start.sh
+   97  cd 
+   98  ls
+   99  cd /
+  100  ls
+  101  pwd
+  102  mkdir test
+  103  sudo mkdir test
+  104  ls
+  105  rm -rf test 
+  106  sudo rm -rf test 
+  107  ls
+  108  npm install phantomjs
+  109  cp ~/Downloads/phantomjs-1.9.8-macosx.zip /var/folders/sx/q711wrjj363fg7phmdz97m440000gn/T/phantomjs/
+  110  npm install phantomjs
+  111  npm install 
+  112  npm -g install bower gulp
+  113  bower install
+  114  bower install
+  115  gulp build
+  116  ls
+  117  cd local/
+  118  ls
+  119  cd github/abbytraining/ls
+  120  cd github/abbytraining/
+  121  ls
+  122  cd frontend-org/
+  123  s
+  124  ls
+  125  npm install
+  126  exit
+  127  gulp serve
+  128  gulp serve
+  129  cd ..
+  130  ls
+  131  cd frontend
+  132  ls
+  133  gulp serve
+  134  history 
+  135  java -version
+  136  which java
+  137  ls /Library/Java/JavaVirtualMachines/
+  138  exit
+  139  exit
+  140  exit
+  141  java -version
+  142  exit
+  143  npm install
+  144  cp ~/Downloads/phantomjs-1.9.8-macosx.zip /var/folders/sx/q711wrjj363fg7phmdz97m440000gn/T/phantomjs/
+  145  npm install
+  146  npm install
+  147  brew install
+  148  npm -g install bower gulp
+  149  which python
+  150  bower install
+  151  gulp build
+  152  gulp build
+  153  npm install
+  154  bower install
+  155  mv /Users/wuchunlong/local/github/abbytraining/frontend-org/node_modules/node-sass/vendor/darwin-x64-48/binding.node /Users/wuchunlong/local/github/abbytraining/frontend-org/node_modules/node-sass/vendor/darwin-x64-48/binding.node.bak
+  156  bower install
+  157  npm install
+  158  gulp build
+  159  npm rebuild node-sass
+  160  gulp build
+  161  exit
+  162  ls
+  163  java -version
+  164  cd ..
+  165  cd frontend
+  166  gulp build
+  167  which python
+  168  which python
+  169  ls
+  170  cd2git
+  171  cd ..
+  172  ls
+  173  ./run_test.sh 
+  174  git st
+  175  git status
+  176  git diff
+  177  git checkout start.sh
+  178  git st
+  179  git status
+  180  python
+  181  ./run_test.sh 
+  182  ./run_test.sh 
+  183  ls
+  184  pip install flask_sqlalchemy
+  185  pip install flask_login
+  186  pip install flask_babel
+  187  ls
+  188  pip install -r requirements.txt test-requirements.txt 
+  189  pip install -r requirements.txt 
+  190  test requirements.txt
+  191  start
+  192  ls
+  193  start.sh
+  194  start.bat
+  195  pwd
+  196  dir
+  197  ls
+  198  ./start.sh
+  199  git st
+  200  git status
+  201  ls
+  202  ls
+  203  ./start.sh 
+  204  ./start.sh 
+  205  git status
+  206  git st
+  207  git diff
+  208  git commit "add /api/categories"
+  209  git commit -a -m "add /api/categories"
+  210  git st
+  211  git status
+  212  git push
+  213  ./run_test.sh 
+  214  pip install -r test-requirements.txt 
+  215  pip install -r test-requirements.txt 
+  216  pip install -r test-requirements.txt 
+  217  pip install -r test-requirements.txt 
+  218  ./run_test.sh 
+  219  ./run_test.sh 
+  220  ./run_test.sh 
+  221  ./run_test.sh 
+  222  ./run_test.sh 
+  223  git diff
+  224  git ci -a -m "remove test error"
+  225  git commit -a -m "remove test error"
+  226  git push
+  227  ./run_test.sh 
+  228  ./start.sh 
+  229  ./run_test.sh 
+  230  ./run_test.sh 
+  231  git st
+  232  git commit -a -m  "finished Category model"
+  233  gi push
+  234  git push
+  235  ./run_test.sh 
+  236  ./run_test.sh 
+  237  ls
+  238  ./run_test.sh 
+  239  ./run_test.sh 
+  240  ./run_test.sh 
+  241  ./run_test.sh 
+  242  ./run_test.sh
+  243  ./run_test.sh
+  244  ./run_test.sh
+  245  ./run_test.sh
+  246      def addVideo(self):
+  247          video = Video(name='testCategory',
+  248                              image='http://testImage', 
+  249                              about='testAbout')
+  250          db.session.add(category)
+  251          db.session.commit()         ret = Video.query.filter_by(id=video.id).first()
+  252          self.assertEqual(ret.id, video.id)
+  253          return ret
+  254      def addVideo(self):
+  255          video = Video(name='testCategory',
+  256                              image='http://testImage', 
+  257                              about='testAbout')
+  258          db.session.add(category)
+  259          db.session.commit()         ret = Video.query.filter_by(id=video.id).first()
+  260          self.assertEqual(ret.id, video.id)
+  261          return ret
+  262      def addVideo(self):
+  263          video = Video(name='testCategory',
+  264                              image='http://testImage', 
+  265                              about='testAbout')
+  266          db.session.add(category)
+  267          db.session.commit()         ret = Video.query.filter_by(id=video.id).first()
+  268          self.assertEqual(ret.id, video.id)
+  269          return ret
+  270      def addVideo(self):
+  271          video = Video(name='testCategory',
+  272                              image='http://testImage', 
+  273                              about='testAbout')
+  274          db.session.add(category)
+  275          db.session.commit()         ret = Video.query.filter_by(id=video.id).first()
+  276          self.assertEqual(ret.id, video.id)
+  277          return ret
+  278  ./run_test.sh
+  279      def addVideo(self):
+  280          video = Video(name='testCategory',
+  281                              image='http://testImage', 
+  282                              about='testAbout')
+  283          db.session.add(category)
+  284          db.session.commit()         ret = Video.query.filter_by(id=video.id).first()
+  285          self.assertEqual(ret.id, video.id)
+  286          return ret
+  287  ./run_test.sh
+  288  ./run_test.sh
+  289  ./run_test.sh
+  290  ./run_test.sh
+  291  ./run_test.sh
+  292  ./run_test.sh
+  293  ./run_test.sh
+  294  ./run_test.sh 
+  295  git diff
+  296  api_res.add_resource(API_Category, '/categories/<md5_id:id>')
+  297  ./run_test.sh
+  298  ./run_test.sh
+  299  ./run_test.sh
+  300  ./run_test.sh
+  301  ./run_test.sh
+  302  ./run_test.sh
+  303  ./run_test.sh
+  304  ./run_test.sh
+  305  git diff
+  306  ./run_test.sh 
+  307  cd edustack/
+  308  ls
+  309  cd models/
+  310  ls
+  311  cd ..
+  312  ls
+  313  cd ..
+  314  . env/bin/activate
+  315  cd mo
+  316  cd edustack/
+  317  ls
+  318  cd models/
+  319  ls
+  320  nosetests
+  321  nosetests course.py
+  322  nosetests test/testCourse.py
+  323  nosetests test/testCourse.py
+  324  nosetests test/testCourse.py
+  325  nosetests test/testCourse.py
+  326  nosetests test/testCourse.py
+  327  ./run_test.sh 
+  328  ./run_test.sh
+  329  pwd
+  330  cd Desktop/local/github/abbytraining/
+  331  ls
+  332  pwd
+  333  ls
+  334  git diff
+  335  pwd
+  336  cd ..
+  337  pwd
+  338  cd ..
+  339  pwd
+  340  ls
+  341  cd user
+  342  cd User
+  343  cd\user
+  344  pwd
+  345  cd user/
+  346  pwd
+  347  cd user/
+  348  cd /user
+  349  pwd
+  350  cd /User
+  351  pwd
+  352  ls
+  353  cd ..
+  354  pwd
+  355  ls
+  356  cd Desktop/
+  357  pwd
+  358  ls
+  359  pwd
+  360  pwd
+  361  ls
+  362  cd desktop/
+  363  pwd
+  364  ls
+  365  pwd
+  366  ls
+  367  cd local/
+  368  pwd
+  369  ls
+  370  cd wcl/
+  371  ls
+  372  cd AbbyTraining-master/
+  373  ls
+  374  pwd
+  375  pwd
+  376  pwd
+  377  ls
+  378  cd desktop/
+  379  ls
+  380  cd local/
+  381  ls
+  382  cd wcl
+  383  ls
+  384  cd AbbyTraining-master/
+  385  ls
+  386  run_test.sh
+  387  /
+  388  ./run_test.sh
+  389  ./run_test.sh
+  390  ls
+  391  pwd
+  392  pwd
+  393  cd Desktop/local/wcl/AbbyTraining-master
+  394  pwd
+  395  ls
+  396  cd Desktop/local/wcl/AbbyTraining-master/
+  397  ls
+  398  exit() exit()
+  399  exit
+  400  ls
+  401  exit
+  402  ls
+  403  cd Desktop/
+  404  ls
+  405  rm -rf Office\ 2011\ 2/
+  406  ls
+  407  rm -rf Office2011Mac.zip 
+  408  ls
+  409  困
+  410  ls
+  411  cp ~/Desktop/conifg/bash/.bashrc ~/
+  412  vi ~/.bashrc 
+  413  bash
+  414  ls
+  415  vi ~/.bashrc 
+  416  bash
+  417  ls
+  418  pwd
+  419  ls
+  420  cd /
+  421  ls
+  422  cd 
+  423  cd local/
+  424  ls
+  425  mkdir cd github/
+  426  ls
+  427  rmdir cd
+  428  ls
+  429  cd github/
+  430  ls
+  431  ls
+  432  which ls
+  433  vi ~/.bashrc 
+  434  -bash
+  435  ls
+  436  . ~/.bashrc
+  437  ls
+  438  cd2ab 
+  439  ls
+  440  pwd
+  441  cd2local 
+  442  ls
+  443  cd github/
+  444  ls
+  445  cd ..
+  446  cd 
+  447  ls
+  448  cd local/
+  449  ls
+  450  cd ~/D
+  451  cd ~/Desktop/
+  452  ls
+  453  cd conifg/
+  454  ls
+  455  cd git/
+  456  ls
+  457  ls
+  458  cd ..
+  459  cd vi/
+  460  ls
+  461  ls
+  462  ls -al
+  463  cd ../
+  464  ls
+  465  cp git/.gitconfig ~/
+  466  ls
+  467  vi ~/.gitconfig 
+  468  cat ~/.gitconfig 
+  469  vi ~/.gitconfig 
+  470  git st
+  471  exit
+  472  . ~/.bashrc
+  473  ls
+  474  git st
+  475  exit
+  476  . ~/.bashrc
+  477  . ~/.bashrc
+  478  . ~/.bashrc
+  479  git st
+  480  ls
+  481  git --config list
+  482  git config --list
+  483  git st
+  484  ls
+  485  cd2ab 
+  486  ls
+  487  cd ..
+  488  ls
+  489  cd ..
+  490  mkdir test
+  491  ls
+  492  cd test/
+  493  ls
+  494  git clone https://www.github.com/wu-wenxiang/abbytraining
+  495  ls
+  496  cd ..
+  497  ls
+  498  rm -rf test/*
+  499  ls
+  500  cd 
+  501  . ~/.bashrc
+  502  ls
+  503  vi fabfile.py 
+  504  cd2ab 
+  505  ls
+  506  git st
+  507  git co edustack/apis/course.py edustack/apis/test/testCourse.py edustack/models/course.py
+  508  git st
+  509  git co master
+  510  git st
+  511  git pull
+  512  git st
+  513  git br -a
+  514  git co wuchunlong-test
+  515  git st
+  516  ls
+  517  vi manage.py 
+  518  git st
+  519  git diff
+  520  git ci -a -m "test commit"
+  521  git st
+  522  git push
+  523  git st
+  524  git push
+  525  git st
+  526  history 
+  527  git st
+  528  history > ~/Desktop/history2.txt
+
+网站
+
+    Demo
+
+开发
+
+    本地环境
+        Mac/Linux/Unix
+            本地运行：.\start.sh
+            本地测试：.\run_test.sh
+        Windows:
+            本地运行：.\start.bat
+            本地测试：.\run_test.bat
+    部署到生产环节
+        Config: copy .fabricrc to fabricrc, config it
+        Init: fab -c fabricrc init_deploy_u1604
+        Re-Deploy: fab -c fabricrc deploy
+        升级数据库后，不知何故，有时候migrations目录中的0*文件删不干净，需要手动清理：
+            rm -rf "${BASE_DIR}/mysite/account/migrations/0*"
+            然后在./start.sh就好了
+    超级管理员
+        initdb.py
+        admin, 56e1E@ab1234
+        op1, 1E@ab1234
+        cx1, @aB1234
+
+坑
+
+    i18n
+        settings文件中写zh-Hans，locale目录中文件夹名字必须是下划线，zh_Hans
+        启动目录必须是Project根目录，supervior的配置文件亦然
+        ubuntu上要安装gettext: sudo apt-get install gettext，mac亦然: brew install gettext
+    参考
+        ybdesire/WebLearn
+        本地化／国际化
+            LocaleMiddleware 按照如下算法确定用户的语言:
+                首先，在当前用户的 session 的中查找django_language键；
+                如未找到，它会找寻一个cookie
+                还找不到的话，它会在 HTTP 请求头部里查找Accept‐Language， 该头部是你的浏览器发送的，并且按优先顺序告诉服务器你的语言偏好。 Django会尝试头部中的每一个语种直到它发现一个可用的翻译。
+                以上都失败了的话, 就使用全局的 LANGUAGE_CODE 设定值。
+            Django使用以下算法寻找翻译：
+                首先，Django在该视图所在的应用程序文件夹中寻找 locale 目录。 若找到所选语言的翻译，则加载该翻译。
+                第二步，Django在项目目录中寻找 locale 目录。 若找到翻译，则加载该翻译。
+                最后，Django使用 django/conf/locale 目录中的基本翻译。
+
+Backlog
+
+    restful API
+    i18n，要可以切换中英文
+    404页面    - 弄好看点的404，403，500，这个不重要，晚点弄好了
+
