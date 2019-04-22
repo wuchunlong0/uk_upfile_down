@@ -75,7 +75,7 @@ def uploadfile(request):
         # 保存上传文件
         save_upfile(filepath,Myfile)
         save_upfile(imgpath,MyImg) 
-        shutil.copy(imgpath+MyImg.name,'{0}/static/upload/upimg/{1}'.format(os.getcwd(),MyImg.name))             
+        shutil.copy(imgpath+MyImg.name,'{0}/static/upload/upimg/'.format(os.getcwd()))             
         # 写入数据库
         u = Upresources(
             uploadfile = uploadfile, # filepath + Myfile.name,#数据库保存包含路径的文件名     
