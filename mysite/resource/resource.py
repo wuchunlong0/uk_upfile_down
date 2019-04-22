@@ -5,7 +5,7 @@
 # 4、templates中,增加模板文件目录/mytest
 from __future__ import unicode_literals
 import datetime
-import os
+import os,shutil
 import json
 from django.shortcuts import render
 from django.http.response import HttpResponseRedirect,HttpResponse,StreamingHttpResponse
@@ -38,7 +38,8 @@ def save_upfile(filepath,mode):
 #注意：图像数据库中保存的文件名与保存文件的文件名，路径有区别。
 @login_required
 def uploadfile(request):   
-    PATH = '{}/static_common/upload/'.format(os.getcwd()) 
+    get_dir = os.getcwd()
+    PATH = '{}/static/upload/'.format(get_dir)
     filepath = PATH +'upfile/'#设置保存资源文件路径
     imgpath =  PATH +'upimg/'#设置保存图像文件路径        
 
@@ -74,7 +75,10 @@ def uploadfile(request):
         
         # 保存上传文件
         save_upfile(filepath,Myfile)
-        save_upfile(imgpath,MyImg) 
+        save_upfile(imgpath,MyImg)
+        #print(imgpath+MyImg)
+        #print('{}/static_common/upload/upimg/'.format(get_dir)+MyImg )
+        shutil.copy(imgpath+MyImg.name,'{0}/static_common/upload/upimg/{1}'.format(get_dir,MyImg.name) ) 
                      
         # 写入数据库
         u = Upresources(
