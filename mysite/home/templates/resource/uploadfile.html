@@ -2,23 +2,20 @@
 {% block content %}
 <head>
     <link rel="stylesheet" href="/static/resource_min/css/common.min.css" >
-    <script src="/static/resource_min/js/wcl6005.file.js"></script>
+    <script src="/static/resource_min/js/myupfile.js"></script>
     <link rel="stylesheet" href="/static/resource_min/css/common.css" >
    
 </head>
 
+<!-- onload()加载网页时就运行 -->
 <body onload='onload()'>
 <div class="wrapper">
- 
-  
 <script>
     function onload(){
-        //alert('ok');
-        var fsizeset1 = 209715200;  //设定文件大小阀值200M(1MB =1024*1024=1048576 )
-        document.getElementById('upfsizedisp1').innerHTML ="上传文件不得大于: "+SizeConvert(fsizeset1);//加载网页时就运行，并调用js函数SizeConvert(setfilesize) 显示设定文件大小
-        var fsizeset2 = 1048576;  //设定文件大小阀值1M(1MB =1024*1024=1048576 )
-        document.getElementById('upfsizedisp2').innerHTML ="上传文件不得大于: "+SizeConvert(fsizeset2);//加载网页时就运行，并调用js函数SizeConvert(setfilesize) 显示设定文件大小
-
+        var setupfile = 209715200;  //设定上传资源文件大小阀值200M(200MB=209715200)
+        document.getElementById('upfileshow').innerHTML = "大小应小于{0}.".format(SizeConvert(setupfile));
+        var setupimg = 1048576;  //设定上传图像文件大小阀值1M(1MB=1024*1024=1048576)
+        document.getElementById('upimgshow').innerHTML = "大小应小于{0}.".format(SizeConvert(setupimg));
     }
 </script>  
 
@@ -53,9 +50,10 @@
                     <dl>
                         <dt>上传资源</dt>
                         <dd>
-                            <p>上传的资源需与主题内容相符合，若发现不符合，内容将被删除。</p>
+                            <p>确认上传后，将不可修改和删除。上传的资源需与主题内容相符合，若发现不符合，内容将被删除。</p>
                         </dd>
                     </dl>
+
                 </div>
             </div>
         </aside>
@@ -64,14 +62,14 @@
         <div id="main">
         
 
-            <form action="#" name="upForm" method="post" class="form form-issue" autocomplete="off" enctype="multipart/form-data" required onsubmit="return istwofile(209715200,1048576)">
+            <form action="#" name="upForm" method="post" class="form form-issue" autocomplete="off" enctype="multipart/form-data" required onsubmit="return isupfileupImg(209715200,1048576)">
 
                 {% csrf_token %}              
                 
                 <fieldset>
                     <div class="form-group">
-                        <span style="color:#0AA20A">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp请选择一个压缩资源文件。确认上传后，将不可修改和删除。</span> 
-                         <span  id="upfsizedisp1" style="color:#0AA20A"></span>  </br>
+                        <span style="color:#0AA20A">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp请选择资源文件(若是多个文件,压缩为一个文件),</span> 
+                         <span  id="upfileshow" style="color:#0AA20A"></span>  </br>
                         <div class="form-item">
                             <div class="item-label">资源文件</div>
                             <div class="item-cont">
@@ -82,8 +80,8 @@
 
                             </div>
                         </div>
-                        <span style="color:#0AA20A">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp请选择一个效果图(.jpg)文件。确认上传后，将不可修改和删除。</span>  
-                        <span  id="upfsizedisp2" style="color:#0AA20A"></span>  </br>
+                        <span style="color:#0AA20A">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp请选择一个效果图(.jpg)文件,</span>  
+                        <span  id="upimgshow" style="color:#0AA20A"></span>  </br>
                         <div class="form-item">
                             <div class="item-label">效果图像</div>
                             <div class="item-cont">
@@ -96,11 +94,8 @@
                         </div>
 
                         <!--隐形传递下列参数 style="display:none" -->
-                        <!--input   type='text' name='username' value="username" style="display:none"-->
-
-
                         <!--id="upfilesize"从JS document.getElementById("upfilesize").value来，获得value值-->
-                        <input   name="upfilesize" id="upfilesize"  type="text"  style="display:none">
+                        <input name="upfilesize" id="upfilesize"  type="text"  style="display:none">
 
                         <div class="form-item">
                             <div class="item-label">资源标题</div>

@@ -77,22 +77,22 @@ def uploadfile(request):
         save_upfile(imgpath,MyImg) 
                      
         # 写入数据库
-        upresources = Upresources(
-                uploadfile = uploadfile, # filepath + Myfile.name,#数据库保存包含路径的文件名     
-                uploadimg = '/static/upload/upimg/' + MyImg.name,#数据库保存包含路径的文件名     
-                username = request.user, #登录用户,
-                title = title,
-                editor = request.POST['editor'],
-                source = request.POST['source'],
-                type = request.POST['type'],
-                cid1 = request.POST['cid1'],
-                environment = request.POST['environment'],
-                label = request.POST['tag'],
-                downnum = '0',
-                browsernum = '0',
-                size = sizeConvert(int(request.POST['upfilesize'])) #调用转换函数,获得B KB MB GB TB,                
+        u = Upresources(
+            uploadfile = uploadfile, # filepath + Myfile.name,#数据库保存包含路径的文件名     
+            uploadimg = '/static/upload/upimg/' + MyImg.name,#数据库保存包含路径的文件名     
+            username = request.user, #登录用户,
+            title = title,
+            editor = request.POST['editor'],
+            source = request.POST['source'],
+            type = request.POST['type'],
+            cid1 = request.POST['cid1'],
+            environment = request.POST['environment'],
+            label = request.POST['tag'],
+            downnum = '0',
+            browsernum = '0',
+            size = sizeConvert(int(request.POST['upfilesize'])) #调用转换函数,获得B KB MB GB TB,                
         )
-        upresources.save()        
+        u.save()        
         upresources,page,num = _get_model_by_page(request,Upresources.objects.all(),PAGE_NUM) #每页显示page_size       
         return  render(request, 'resource/showupresource.html', context=locals()) 
     return  render(request, 'resource/uploadfile.html', context=locals()) 
