@@ -18,6 +18,9 @@ admin/1234qazx<br>
 test/1234qazx<br>
 
 五、更新记录<br>
-文件上传、显示、搜索、下载正常！<br>
+文件上传、显示、搜索、下载正常！上传的效果图不改名<br>
 git ci -a -m '1000'  <br>
+
+文件上传、显示、搜索、下载正常！上传的效果图改名<br>
+git ci -a -m '1000 add title_imgname' <br>
 

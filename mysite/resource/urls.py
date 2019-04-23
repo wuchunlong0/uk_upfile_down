@@ -12,5 +12,5 @@ urlpatterns = [
     
     url(r'^search/', resource.search, name="search"),
     url(r'^downFile/', resource.downFile, name="downFile"),
-           
+    url(r'^delete/', resource.delete, name="delete"),           
 ]

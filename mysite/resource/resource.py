@@ -46,8 +46,8 @@ def save_upimg(filepath,mode,filename):
 @login_required
 def uploadfile(request):
     os_dir = os.getcwd()   
-    filepath = '%s/static_common/upload/upfile/' %(os_dir)#设置保存资源文件路径
-    imgpath =  '%s/static_common/upload/upimg/' %(os_dir)#设置保存图像文件路径        
+    filepath = '%s/static_common/upload/upfile/' %(os_dir) 
+    imgpath =  '%s/static_common/upload/upimg/' %(os_dir)        
 
     groups = request.user.groups.values_list('name',flat=True)
     if not (request.user.is_superuser or 'Operator' in groups):
@@ -58,7 +58,7 @@ def uploadfile(request):
         return  HttpResponseRedirect('/resource/search/')
    
     if request.method == 'POST':       
-        Myfile = request.FILES.get("upfile", None)    # 获取上传的文件，如果没有文件，则默认为None  
+        Myfile = request.FILES.get("upfile", None)
         if not Myfile:
             messages.info(request, '警告：没有获得上传文件!')
             return HttpResponseRedirect('/resource/uploadfile/')        
@@ -180,3 +180,16 @@ def downFile(request):
         Upresources.objects.filter(uploadfile = uploadfile).update(downnum = downnum)      
         return downLoad        
     return HttpResponseRedirect('/resource/showupresource/')
+
+#删除 http://localhost:8000/resource/delete/
+def delete(request):
+    title = request.GET.get('title','')
+    if title:
+        Upresources.objects.filter(title=title).delete()
+        os_dir = os.getcwd()
+        static_imgname =  '%s/static/upload/upimg/%s.jpg' %(os_dir, title)
+        static_common_imgname =  '%s/static_common/upload/upimg/%s.jpg' %(os_dir, title) 
+        os.remove(static_imgname) if(os.path.exists(static_imgname)) else ''
+        os.remove(static_common_imgname) if(os.path.exists(static_common_imgname)) else ''    
+    return HttpResponseRedirect('/resource/showupresource/')
+        

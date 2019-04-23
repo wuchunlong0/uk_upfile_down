@@ -81,13 +81,18 @@
                             </div>
                         </div>
                     </aside>
-                
+
+
                     <div class="resource-content">
+                    
+
                         <dl>
                             <dt><a href="#" title="" target="_blank">
                                 {{upresource.title}}  </a></dt>
                             <dd>{{upresource.editor|safe}}<a href="/resource/showcomment/?title={{upresource.title}}" title="" target="_blank">详情&gt;&gt;</a></dd>
                         </dl>
+
+
                         <section class="resource-info">
                             <div class="wrap">
                                 <ul class="resource-attr">
@@ -102,11 +107,19 @@
                                 
                             </div>
 
-                            
+                           
                             <a href="/resource/downFile/?uploadfile={{upresource.uploadfile}}" class="btn-def btn-download">&nbsp;&nbsp;&nbsp;<i class="uk-icon-download"></i>&nbsp;下载
                             </a>
-                        </section>
+                        </section>                                           
+
+                        <dl></dl><br>
+
+                        <div class="resource-info">
+                            <a href="/resource/delete/?title={{upresource.title}}" class="btn-def btn-download" onclick="return confirm('文件名: {{upresource.uploadimg}}。删除不可恢复,确定要删除此文件吗?')">&nbsp;&nbsp;&nbsp;<i class="uk-icon-trash-o"></i>&nbsp;删除
+                            </a>
+                        </div>                        
                     </div>
+
                 </div>
                 <!-- resource end -->
 
