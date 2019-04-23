@@ -25,4 +25,7 @@ git ci -a -m '1000'  <br>
 git ci -a -m '1000 add title_imgname' <br>
 
 文件上传、显示、搜索、下载正常！上传的效果图改名 前端增加删除上传资源功能(超级用户)<br>
-git ci -a -m '1000 add title_imgname delete'
+git ci -a -m '1000 add title_imgname delete'<br>
+
+文件上传、显示、搜索、下载正常！上传的效果图改名 前端增加删除上传资源功能(超级用户) 权限  <br>
+git ci -a -m '2000 添加权限'<br>
