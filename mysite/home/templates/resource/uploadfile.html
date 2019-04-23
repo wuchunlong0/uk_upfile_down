@@ -12,7 +12,7 @@
 <div class="wrapper">
 <script>
     function onload(){
-        var setupfile = 209715200;  //设定上传资源文件大小阀值200M(200MB=209715200)
+        var setupfile = 209715200*5;  //设定上传资源文件大小阀值200M(200MB=209715200)
         document.getElementById('upfileshow').innerHTML = "大小应小于{0}.".format(SizeConvert(setupfile));
         var setupimg = 1048576;  //设定上传图像文件大小阀值1M(1MB=1024*1024=1048576)
         document.getElementById('upimgshow').innerHTML = "大小应小于{0}.".format(SizeConvert(setupimg));
@@ -62,7 +62,7 @@
         <div id="main">
         
 
-            <form action="#" name="upForm" method="post" class="form form-issue" autocomplete="off" enctype="multipart/form-data" required onsubmit="return isupfileupImg(209715200,1048576)">
+            <form action="#" name="upForm" method="post" class="form form-issue" autocomplete="off" enctype="multipart/form-data" required onsubmit="return isupfileupImg(209715200*5,1048576)">
 
                 {% csrf_token %}              
                 
