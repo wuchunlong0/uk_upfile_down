@@ -32,15 +32,22 @@ def save_upfile(filepath,mode):
         destination.write(chunk)  
     destination.close() 
 
+def save_upimg(filepath,mode,filename):
+    destination = open(os.path.join(filepath,filename),'wb+')  # 打开特定的文件进行二进制的写操作  
+    for chunk in mode.chunks():  # 分块写入文件  
+        destination.write(chunk)  
+    destination.close() 
+
+
 #Admin用户，才能上传资源写入数据库 http://localhost:8000/resource/uploadfile/
 # 前台验证：先判断资源upfile、图像upImg二个文件文件大小是否超过阀值，再判断第二个文件扩展名是否合法。
 # 后台验证：判断title、uploadfile两个字段是否有相同的记录。
 #注意：图像数据库中保存的文件名与保存文件的文件名，路径有区别。
 @login_required
-def uploadfile(request):   
-    PATH = '{}/static_common/upload/'.format(os.getcwd()) 
-    filepath = PATH +'upfile/'#设置保存资源文件路径
-    imgpath =  PATH +'upimg/'#设置保存图像文件路径        
+def uploadfile(request):
+    os_dir = os.getcwd()   
+    filepath = '%s/static_common/upload/upfile/' %(os_dir)#设置保存资源文件路径
+    imgpath =  '%s/static_common/upload/upimg/'%(os_dir)#设置保存图像文件路径        
 
     groups = request.user.groups.values_list('name',flat=True)
     if not (request.user.is_superuser or 'Operator' in groups):
@@ -55,7 +62,7 @@ def uploadfile(request):
         if not Myfile:
             messages.info(request, '警告：没有获得上传文件!')
             return HttpResponseRedirect('/resource/uploadfile/')        
-        MyImg =request.FILES.get("upImg", None)     
+        MyImg = request.FILES.get("upImg", None)     
         if not MyImg:
             messages.info(request, '警告：没有获得上传图像!')
             return HttpResponseRedirect('/resource/uploadfile/')  
@@ -73,13 +80,13 @@ def uploadfile(request):
             return HttpResponseRedirect('/resource/uploadfile/')        
         
         # 保存上传文件
-        save_upfile(filepath,Myfile)
-        save_upfile(imgpath,MyImg) 
-        shutil.copy(imgpath+MyImg.name,'{0}/static/upload/upimg/'.format(os.getcwd()))             
+        save_upfile(filepath,Myfile) 
+        save_upimg(imgpath,MyImg,'%s.jpg' %(title)) 
+        shutil.copy('%s%s' %(imgpath,'%s.jpg' %(title)),'%s/static/upload/upimg/' %(os_dir))             
         # 写入数据库
         u = Upresources(
             uploadfile = uploadfile, # filepath + Myfile.name,#数据库保存包含路径的文件名     
-            uploadimg = '/static/upload/upimg/' + MyImg.name,#数据库保存包含路径的文件名     
+            uploadimg = '/static/upload/upimg/%s.jpg' %(title),#数据库保存包含路径的文件名     
             username = request.user, #登录用户,
             title = title,
             editor = request.POST['editor'],
@@ -92,7 +99,8 @@ def uploadfile(request):
             browsernum = '0',
             size = sizeConvert(int(request.POST['upfilesize'])) #调用转换函数,获得B KB MB GB TB,                
         )
-        u.save()        
+        u.save() 
+                      
         upresources,page,num = _get_model_by_page(request,Upresources.objects.all(),PAGE_NUM) #每页显示page_size       
         return  render(request, 'resource/showupresource.html', context=locals()) 
     return  render(request, 'resource/uploadfile.html', context=locals()) 
