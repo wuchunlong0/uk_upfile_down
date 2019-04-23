@@ -24,3 +24,5 @@ git ci -a -m '1000'  <br>
 文件上传、显示、搜索、下载正常！上传的效果图改名<br>
 git ci -a -m '1000 add title_imgname' <br>
 
+文件上传、显示、搜索、下载正常！上传的效果图改名 前端增加删除上传资源功能(超级用户)<br>
+git ci -a -m '1000 add title_imgname delete'

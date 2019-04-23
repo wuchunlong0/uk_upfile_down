@@ -17,8 +17,13 @@ from myAPI.convertAPI import sizeConvert
 from myAPI.myFile import MyFile,WriteFile,searchTxt,GetTxtfile 
 from myAPI.fileAPI import GetfileLineTxt
 from myAPI.download import downLoadFile
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 PAGE_NUM = '3' #设置每页显示数
+
+# 列表形式，获得Operator组用户  
+def _getOperators():
+    operators = Group.objects.get(name='Operator').user_set.all()
+    return [user for user in User.objects.all() if user.is_superuser or user in operators]
 
 # http://localhost:8000/resource/test/
 def test(request):
@@ -141,6 +146,7 @@ def search(request):
 #显示上传资源 http://localhost:8000/resource/showupresource/
 def showupresource(request): 
     fieldname = '全部资源'
+    operators = _getOperators() 
     upresources,page,num = _get_model_by_page(request,Upresources.objects.all(),PAGE_NUM)
     return  render(request, 'resource/showupresource.html', context=locals()) 
 

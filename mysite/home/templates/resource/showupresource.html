@@ -112,12 +112,16 @@
                             </a>
                         </section>                                           
 
+
+                        {% if user in operators %}
+
                         <dl></dl><br>
 
                         <div class="resource-info">
                             <a href="/resource/delete/?title={{upresource.title}}" class="btn-def btn-download" onclick="return confirm('文件名: {{upresource.uploadimg}}。删除不可恢复,确定要删除此文件吗?')">&nbsp;&nbsp;&nbsp;<i class="uk-icon-trash-o"></i>&nbsp;删除
                             </a>
-                        </div>                        
+                        </div>
+                        {% endif %}                        
                     </div>
 
                 </div>
