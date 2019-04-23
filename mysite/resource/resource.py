@@ -47,7 +47,7 @@ def save_upimg(filepath,mode,filename):
 def uploadfile(request):
     os_dir = os.getcwd()   
     filepath = '%s/static_common/upload/upfile/' %(os_dir)#设置保存资源文件路径
-    imgpath =  '%s/static_common/upload/upimg/'%(os_dir)#设置保存图像文件路径        
+    imgpath =  '%s/static_common/upload/upimg/' %(os_dir)#设置保存图像文件路径        
 
     groups = request.user.groups.values_list('name',flat=True)
     if not (request.user.is_superuser or 'Operator' in groups):
@@ -79,14 +79,15 @@ def uploadfile(request):
             messages.info(request, '警告：上传文件 - {} 文件已经上传!'.format(Myfile.name))
             return HttpResponseRedirect('/resource/uploadfile/')        
         
+        title_imgname = '%s.jpg' %(title)
         # 保存上传文件
         save_upfile(filepath,Myfile) 
-        save_upimg(imgpath,MyImg,'%s.jpg' %(title)) 
-        shutil.copy('%s%s' %(imgpath,'%s.jpg' %(title)),'%s/static/upload/upimg/' %(os_dir))             
+        save_upimg(imgpath,MyImg,title_imgname) 
+        shutil.copy('%s%s' %(imgpath,title_imgname),'%s/static/upload/upimg' %(os_dir))             
         # 写入数据库
         u = Upresources(
             uploadfile = uploadfile, # filepath + Myfile.name,#数据库保存包含路径的文件名     
-            uploadimg = '/static/upload/upimg/%s.jpg' %(title),#数据库保存包含路径的文件名     
+            uploadimg = '/static/upload/upimg/%s' %(title_imgname),#数据库保存包含路径的文件名     
             username = request.user, #登录用户,
             title = title,
             editor = request.POST['editor'],
