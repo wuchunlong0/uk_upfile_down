@@ -7,7 +7,9 @@ python3x  django1.11.5 uk vue <br>
 二、功能：<br>
 1、文件上传、显示、搜索、下载 <br>
 2、详细功能，参见：功能截图.doc <br>
+3、外连：http://47.100.52.110/static/upload/upimg/%E5%90%B4%E4%BD%B3%E7%AB%A5%E5%B9%B4%E7%94%9F%E6%B4%BB.jpg
 
+http://47.100.52.110/static/upload/upfile/%E5%90%B4%E4%BD%B3%E7%AB%A5%E5%B9%B4%E7%94%9F%E6%B4%BB.mp4
 
 三、启动工程<br>
 1、不初始化数据库：./start.sh <br>
