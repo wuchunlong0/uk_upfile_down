@@ -6,7 +6,7 @@ python3x  django1.11.5 uk vue <br>
 
 二、功能：<br>
 1、文件上传、显示、搜索、下载 <br>
-2、详细功能，有截图，参见：主要功能截图.doc <br>
+2、详细功能，参见：功能截图.doc <br>
 
 
 三、启动工程<br>
@@ -17,7 +17,18 @@ python3x  django1.11.5 uk vue <br>
 admin/1234qazx<br>
 test/1234qazx<br>
 
-五、更新记录<br>
+五、关于文件上传
+1、上传文件大小的限制：
+(1) 在js前端，设置上传文件大小<1000m; 
+(2) 在远程主机nginx.conf文件中，设置上传文件大小<1000m;
+$ sudo vim /etc/nginx/nginx.conf，
+dhf在http{}中，添加client_max_body_size 1000m; 如下所示：
+http{
+ client_max_body_size 1000m;  #添加
+}
+2、上传696MB.MP4,测试通过。
+
+六、更新记录<br>
 文件上传、显示、搜索、下载正常！上传的效果图不改名<br>
 git ci -a -m '1000'  <br>
 
@@ -29,3 +40,6 @@ git ci -a -m '1000 add title_imgname delete'<br>
 
 文件上传、显示、搜索、下载正常！上传的效果图改名 前端增加删除上传资源功能(超级用户) 增加权限  <br>
 git ci -a -m '2000 添加权限'<br>
+
+新建文件夹时，里面放一个空文件__init__.py。原因：空文件夹不能被复制！！！
+git ci -a -m '2000 upimg add __init__.py'
