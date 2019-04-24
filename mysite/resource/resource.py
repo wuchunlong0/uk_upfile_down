@@ -51,8 +51,6 @@ def save_upimg(filepath,mode,filename):
 @login_required
 def uploadfile(request):
     os_dir = os.getcwd()   
-#     filepath = '%s/static_common/upload/upfile/' %(os_dir) 
-#     imgpath =  '%s/static_common/upload/upimg/' %(os_dir)        
     filepath = '%s/static/upload/upfile/' %(os_dir) 
     imgpath =  '%s/static/upload/upimg/' %(os_dir)        
 
@@ -90,7 +88,6 @@ def uploadfile(request):
         # 保存上传文件
         save_upfile(filepath,Myfile) 
         save_upimg(imgpath,MyImg,title_imgname) 
-#         shutil.copy('%s%s' %(filepath,Myfile.name),'%s/static/upload/upfile/' %(os_dir)  )             
         shutil.copy('%s%s' %(imgpath,title_imgname),'%s/static_common/upload/upimg/' %(os_dir) ) 
         # 写入数据库
         u = Upresources(
