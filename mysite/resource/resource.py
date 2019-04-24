@@ -198,4 +198,7 @@ def delete(request):
         os.remove(static_imgname) if(os.path.exists(static_imgname)) else ''
         os.remove(static_common_imgname) if(os.path.exists(static_common_imgname)) else ''    
     return HttpResponseRedirect('/resource/showupresource/')
-        
+
+def videoplay(request):
+    return  render(request, 'resource/videoplay.html', context=locals()) 
+      
