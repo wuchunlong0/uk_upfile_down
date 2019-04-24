@@ -138,7 +138,8 @@ STATICFILES_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
 )
-
+#print('BASE_DIR===',BASE_DIR)#/Users/wuchunlong/local/github/abbytraining/Controller/complete/uk_upfile_down/mysite
+#print('STATIC_ROOT===',STATIC_ROOT) #/Users/wuchunlong/local/github/abbytraining/Controller/complete/uk_upfile_down/mysite/static
 
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'

@@ -51,8 +51,8 @@ def save_upimg(filepath,mode,filename):
 @login_required
 def uploadfile(request):
     os_dir = os.getcwd()   
-    filepath = '%s/resource/static/upload/upfile/' %(os_dir) 
-    imgpath =  '%s/resource/static/upload/upimg/' %(os_dir)        
+    filepath = '%s/static/upload/upfile/' %(os_dir) 
+    imgpath =  '%s/static/upload/upimg/' %(os_dir)        
 
     groups = request.user.groups.values_list('name',flat=True)
     if not (request.user.is_superuser or 'Operator' in groups):
