@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+<meta name="format-detection" content="telephone=no" />
+<!--[if lte IE 7]><script>window.location.href='/manager/ie6.html?referrer='+location.href;</script><![endif]-->
+
+<title>联系我们</title>
+
+
+
+<div class="fwmain" style="position:relative;height:736px;width:100%;min-height:10px"  rel="17">  联系我们
+ 
+ <div class="edit_putHere  block_area" rel="295" id="295" saveTitle="area295" style="width:416px;height:286px;z-index:100;left:53.5px;top:184px;position:absolute;background-color:#266FCA; ">
+<div class="label clear" id="81" rel="81" titles="自定义内容"  usestate="1" style='width:388px;height:254px;z-index:100;left:14px;top:16px;position:absolute;margin-left:0px;border:1px solid #fff;'>
+  <div class="label_content">
+    <div class="about_con clearfix">
+      <ul id="udContent81"><li><span style="font-size:14px;line-height:2;color:#FFFFFF;"><strong>苏州</strong></span><br />
+<span style="font-size:14px;line-height:2;color:#FFFFFF;"><strong>地址：</strong></span><br />
+<span style="font-size:14px;line-height:2;color:#FFFFFF;"><strong>联系电话：</strong></span><br />
+<span style="font-size:14px;line-height:2;color:#FFFFFF;"><strong>电话：</strong></span><br />
+<span style="font-size:14px;line-height:2;color:#FFFFFF;"><strong>E-mail：</strong></span><br />
+<span style="font-size:14px;line-height:2;color:#FFFFFF;"><strong>网址：</strong></span><br />
+<span style="font-size:14px;line-height:2;color:#FFFFFF;"><strong> 苏州</strong></span><br />
+<span style="font-size:14px;line-height:2;"><strong></strong></span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="label_foot"></div>
+</div>
+<script type="text/javascript">$(function(){tlancv('81','14')});</script>
+</div>
+<div class="label clear dzdt408" id="408" rel="408" titles="电子地图"  usestate="1" style='width:1200px;height:610px;z-index:99;left:0px;top:126px;position:absolute;margin-left:0px;'>
+  <div style="width:1200px;height:600px;overflow: hidden;" id="mapContainer408"></div>
+  <div class="label_foot"></div>
+</div>
+<link rel="stylesheet" href="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.css" />
+<script src="http://api.map.baidu.com/api?v=2.0 &ak=CEe15b3a997aef8acb9805e559fb23c0" type="text/javascript"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
+<script type="text/javascript">
+var map408 = new BMap.Map("mapContainer408");
+var poi408 = new BMap.Point(120.619907,31.317987); //苏州
+map408.centerAndZoom(poi408, 15);
+map408.enableScrollWheelZoom();  //启用滚轮放大缩小
+var content408 = '<div style="margin:0;line-height:20px;padding:2px;">' + '<img src="/template/images/nopic.jpg" style="float:right;zoom:1;overflow:hidden;width:0px;height:0px;margin-left:3px;"/>' + '地址：,咨询热线 ' + '</div>';
+var marker408 = new BMap.Marker(poi408); //创建marker对象
+marker408.disableDragging();  //禁止拖拽
+map408.addOverlay(marker408); //在地图中添加marker
+marker408.setAnimation(BMAP_ANIMATION_BOUNCE);  //跳动的标注
+map408.addControl(new BMap.ScaleControl());  // 添加比例尺控件
+map408.addControl(new BMap.MapTypeControl({mapTypes: [BMAP_NORMAL_MAP,BMAP_HYBRID_MAP]})); //添加地图类型控件(2D，卫星，三维)
+map408.addControl(new BMap.NavigationControl());   //左上角，添加默认缩放平移控件
+var searchInfoWindow408 = null;  //创建检索信息窗口对象
+searchInfoWindow408 = new BMapLib.SearchInfoWindow(map408, content408, {
+  title  : "苏州",
+  width  : 200,
+  height : 100,
+  panel  : "panel",
+  enableAutoPan : true,
+  searchTypes   :[
+    BMAPLIB_TAB_SEARCH,
+    BMAPLIB_TAB_TO_HERE,
+    BMAPLIB_TAB_FROM_HERE
+  ]
+});
+searchInfoWindow408.open(marker408);
+</script>
+
+</div>
+
+</div>
+</div>
+
+
+
+</body>
+</html>

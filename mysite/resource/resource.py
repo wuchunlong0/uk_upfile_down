@@ -51,8 +51,8 @@ def save_upimg(filepath,mode,filename):
 @login_required
 def uploadfile(request):
     os_dir = os.getcwd()   
-    filepath = '%s/static/upload/upfile/' %(os_dir) 
-    imgpath =  '%s/static/upload/upimg/' %(os_dir)        
+    filepath = '%s/static_common/upload/upfile/' %(os_dir) 
+    imgpath =  '%s/static_common/upload/upimg/' %(os_dir)        
 
     groups = request.user.groups.values_list('name',flat=True)
     if not (request.user.is_superuser or 'Operator' in groups):
@@ -88,11 +88,12 @@ def uploadfile(request):
         # 保存上传文件
         save_upfile(filepath,Myfile) 
         save_upimg(imgpath,MyImg,title_imgname) 
-        #shutil.copy('%s%s' %(imgpath,title_imgname),'%s/static/upload/upimg' %(os_dir))             
+        shutil.copy('%s%s' %(filepath,Myfile.name),'%s/static/upload/upfile/' %(os_dir)  )             
+        shutil.copy('%s%s' %(imgpath,title_imgname),'%s/static/upload/upimg/' %(os_dir) ) 
         # 写入数据库
         u = Upresources(
             uploadfile = uploadfile, # filepath + Myfile.name,#数据库保存包含路径的文件名     
-            uploadimg = '/static/upload/upimg/%s' %(title_imgname),#数据库保存包含路径的文件名     
+            uploadimg = '%s%s' %('/static/upload/upimg/', title_imgname),#数据库保存包含路径的文件名     
             username = request.user, #登录用户,
             title = title,
             editor = request.POST['editor'],
