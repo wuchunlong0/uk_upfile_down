@@ -47,3 +47,4 @@ git ci -a -m '2000 添加权限'<br>
 git ci -a -m '2000 upimg add __init__.py'
 
 git ci -a -m '5000 外链 视频播放'
+git ci -a -m '5000 上传文件UK动态图标'

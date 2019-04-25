@@ -9,22 +9,19 @@
 <!-- onload()加载网页时就运行 -->
 <body onload='onload()'>
 <div class="wrapper">
-<script>
-    function onload(){
+<script>    
+    function onload(){        
         var setupfile = 1048576*1000;  //设定上传资源文件大小阀值1000M
         document.getElementById('upfileshow').innerHTML = "大小应小于{0}.".format(SizeConvert(setupfile));
         var setupimg = 1048576;  //设定上传图像文件大小阀值1M(1MB=1024*1024=1048576)
         document.getElementById('upimgshow').innerHTML = "大小应小于{0}.".format(SizeConvert(setupimg));
+    
     }
-</script>  
+</script>
 
   <!-- container -->
   <div id="container">
-    <!-- 代码部分begin -->
-    <div class="lanren">
-        <div id="bar" style="width:1%;"></div>
-    </div>
-    <!-- crumb end -->
+    
     <div class="wrap aside-right">
         <!-- aside -->
         <aside id="aside">
@@ -63,7 +60,7 @@
         <!-- main -->
         <div id="main">
         
-
+            <span id="uk-icon-disp" style="color:#0AA20A"></span> <!--提交运行图标-->
             <form action="#" name="upForm" method="post" class="form form-issue" autocomplete="off" enctype="multipart/form-data" required onsubmit="return isupfileupImg(1048576*1000,1048576)">
 
                 {% csrf_token %}              
@@ -71,7 +68,8 @@
                 <fieldset>
                     <div class="form-group">
                         <span style="color:#0AA20A">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp请选择资源文件(若是多个文件,压缩为一个文件),</span> 
-                         <span  id="upfileshow" style="color:#0AA20A"></span>  </br>
+                        <span  id="upfileshow" style="color:#0AA20A"></span>  </br>
+                       
                         <div class="form-item">
                             <div class="item-label">资源文件</div>
                             <div class="item-cont">
@@ -178,13 +176,14 @@
                 </fieldset>
 
                 <textarea name="editor" id="editor" ng-model="editor" required></textarea>
+                         
 
                 <span class="editor" id="editorBox" > 
-                   <input type="submit" class="btn btn-def" id="commentBtn" value="提交" style="margin-left: 588px; margin-top:1px; "/>
+                  <input type="submit" class="btn btn-def" id="commentBtn" value="提交" style="margin-left: 588px; margin-top:1px; "/> 
                 </span>
             </form>
 
-        
+         
 
         </div>
         <!-- main end -->
