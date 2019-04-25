@@ -1,6 +1,7 @@
 {% extends 'home/__base__.html' %}
 {% block content %}
 
+
  <!-- crumb end -->
     <div style="float:right;">
         <!-- aside -->
@@ -83,20 +84,21 @@
                     </aside>
 
 
-                    <div class="resource-content">
-                    
-
-                        <dl>
-                            <dt><a href="#" title="" target="_blank">
+                    <div class="resource-content">                       
+                        <dt><a href="#" title="" target="_blank">
                                 {{upresource.title}}  </a></dt>
-                            <dd>{{upresource.editor|safe}}<a href="/resource/showcomment/?title={{upresource.title}}" title="" target="_blank">详情&gt;&gt;</a></dd>
-                        </dl>
 
+                        <dd> {{upresource.editor|safe}}
+                                <a href="/resource/showcomment/?title={{upresource.title}}" title="" target="_blank">详情&gt;&gt;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+                                <a href="/resource/videoplay/?name={{upresource.uploadfile}}" id='{{ forloop.counter }}'></a>
+                        </dd>
 
                         <section class="resource-info">
                             <div class="wrap">
                                 <ul class="resource-attr">
-                                    <li><i class="uk-icon-user"></i> {{upresource.username}}</li>
+                                    <li><i class="uk-icon-user"></i> {{upresource.username}}</li>                                    
                                     <li>类型:{{upresource.type}}</li>
                                     <li>标签:{{upresource.label}}</li>
                                     <li><i class="uk-icon-eye"></i> {{upresource.browsernum}}</li>
@@ -110,11 +112,21 @@
                            
                             <a href="/resource/downFile/?uploadfile={{upresource.uploadfile}}" class="btn-def btn-download">&nbsp;&nbsp;&nbsp;<i class="uk-icon-download"></i>&nbsp;下载
                             </a>
-                        </section>                                           
+                        </section>
+
+                       
+                        <script>                            
+                            function getFileName(o) {
+                                var pos = o.lastIndexOf('mysite');
+                                return o.substring(pos + 6);
+                            }
+                            var name = '{{upresource.uploadfile}}';
+                            document.getElementById( '{{ forloop.counter }}').innerHTML = getFileName(name);
+                        </script>
+
 
 
                         {% if user in operators %}
-
                         <dl></dl><br>
 
                         <div class="resource-info">
@@ -139,6 +151,8 @@
 
     </div>
 </div>
+
+
 
 <!--page-->
 {% include 'home/page.html'  %}

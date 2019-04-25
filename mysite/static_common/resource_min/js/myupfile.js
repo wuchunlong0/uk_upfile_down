@@ -131,11 +131,11 @@ test("SizeConvert", function() {
 
 //获得文件扩展名      
 function getfileEXT(filename){
-  var index1 = filename.lastIndexOf(".");
-  if(index1 == -1){
+  var index = filename.lastIndexOf(".");
+  if(index == -1){
     return '';
   }else{
-    return  filename.substring(index1+1).toLowerCase();//+1  扩展名前面没有点 如：txt
+    return  filename.substring(index+1).toLowerCase();//+1  扩展名前面没有点 如：txt
   }
 }
 test("getfileEXT", function() {   
@@ -143,4 +143,20 @@ test("getfileEXT", function() {
 	equal(getfileEXT('www/data/index.'), '');
 	equal(getfileEXT('www/data/index.html'), 'html');
 	equal(getfileEXT('www/data/index.HTML'), 'html');
+});
+
+//获得文件名
+function getFileName(filename) {
+  var index = filename.lastIndexOf("/");
+  if(index == -1){
+    return '';
+  }else{
+    return  filename.substring(index+1);
+  }
+}
+test("getFileName", function() {   
+  equal(getFileName('www/data/index'), 'index');
+  equal(getFileName('www/data/index.'), 'index.');
+  equal(getFileName('www/data/index.html'), 'index.html');
+  equal(getFileName('www/data/index.HTML'), 'index.HTML');
 });

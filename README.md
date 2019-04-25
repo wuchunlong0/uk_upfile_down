@@ -46,4 +46,4 @@ git ci -a -m '2000 添加权限'<br>
 新建文件夹时，里面放一个空文件__init__.py。原因：空文件夹不能被复制！！！
 git ci -a -m '2000 upimg add __init__.py'
 
-git ci -a -m '5000 外连'
+git ci -a -m '5000 外链 视频播放'

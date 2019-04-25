@@ -44,7 +44,7 @@ def save_upimg(filepath,mode,filename):
     destination.close() 
 
 
-#Admin用户，才能上传资源写入数据库 http://localhost:8000/resource/uploadfile/
+#只有超级用户，才能上传资源写入数据库 http://localhost:8000/resource/uploadfile/
 # 前台验证：先判断资源upfile、图像upImg二个文件文件大小是否超过阀值，再判断第二个文件扩展名是否合法。
 # 后台验证：判断title、uploadfile两个字段是否有相同的记录。
 #注意：图像数据库中保存的文件名与保存文件的文件名，路径有区别。
@@ -199,6 +199,10 @@ def delete(request):
         os.remove(static_common_imgname) if(os.path.exists(static_common_imgname)) else ''    
     return HttpResponseRedirect('/resource/showupresource/')
 
+#视频播放 http://localhost:8000/resource/videoplay/
 def videoplay(request):
-    return  render(request, 'resource/videoplay.html', context=locals()) 
-      
+    name = request.GET.get('name','')
+    videoname = name.split('mysite')[-1]
+    if 'mp4' in videoname:
+        return  render(request, 'resource/videoplay.html', context=locals()) 
+    return HttpResponseRedirect('/resource/showupresource/') 

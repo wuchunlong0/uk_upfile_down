@@ -1,6 +1,13 @@
 {% extends 'home/__base__.html' %}
 {% block content %}
-  <video width="850" height="650" controls autoplay  style="margin-left: 188px;">
-  <source src="/static/upload/upfile/wujaiH264.mp4" type="video/mp4">
-</video>
+  {% if user.username %}
+  	<video width="1200" height="680" controls autoplay  style="margin-top: -10px;">
+  	<source src="{{videoname}}" type="video/mp4">
+	</video>
+   {% else %}      
+            <div  style="color:#3ACC3A;font-size:14px;">&nbsp;&nbsp;&nbsp;&nbsp;抱歉！您尚未登录，~快
+            <a href='/login/'> 登录 </a> 吧！如果您还没有账号您可以
+            <a href='/home/register/'> 注册 </a> 一个账号
+          </div>       
+    {% endif %}
 {% endblock %}

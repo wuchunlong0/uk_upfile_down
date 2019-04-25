@@ -16,8 +16,10 @@ def registerapi(request):
         return JsonResponse(msgdict)      
     password = request.POST['password']
     email = request.POST['email']
-    user = User.objects.create_superuser(name, email, password)
-    user.save()
+    user = User.objects.create_user(name, email, password)
+    user.is_staff = True
+    user.is_superuser = False
+    user.save()      
     auth_login(request, user) 
     return  JsonResponse({})
 
