@@ -34,7 +34,7 @@ function isupfileupImg(setfilesize1,setfilesize2){
             if(issize('upImg',setfilesize2,'upImgdisp')){
                 if(istype('upImg',setftype,'upImgdisp')){
                     document.getElementById("upfilesize").value = getidFilesize('upfile');//获得文件大小，供使用 <input name="upfilesize" id="upfilesize" type="text" style="display:none">
-                    document.getElementById('uk-icon-disp').innerHTML = '<i class="uk-icon-spinner uk-icon-spin uk-icon-large"></i>';
+                    document.getElementById('uk-icon-disp').innerHTML = '正在上传资源...  <i class="uk-icon-spinner uk-icon-spin uk-icon-large"></i>';
                     //alert('ok');
                     return true;
                 }
