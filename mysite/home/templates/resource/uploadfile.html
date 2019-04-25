@@ -20,11 +20,11 @@
 </script>
 
   <!-- container -->
-  <div id="container">
-    
-    <div class="wrap aside-right">
+  <div id="container">    
+    <div class="wrap aside-right">        
         <!-- aside -->
         <aside id="aside">
+            <span id="uk-icon-disp" style="color:#0AA20A"></span><!--提交运行图标-->
             <div class="aside-list upload-tips">
                 <header class="hd"><h2>上传资源提醒</h2></header>
                 <div class="bd">
@@ -59,17 +59,12 @@
         <!-- aside end -->
         <!-- main -->
         <div id="main">
-        
-            <span id="uk-icon-disp" style="color:#0AA20A"></span> <!--提交运行图标-->
             <form action="#" name="upForm" method="post" class="form form-issue" autocomplete="off" enctype="multipart/form-data" required onsubmit="return isupfileupImg(1048576*1000,1048576)">
-
-                {% csrf_token %}              
-                
+                {% csrf_token %}                              
                 <fieldset>
                     <div class="form-group">
                         <span style="color:#0AA20A">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp请选择资源文件(若是多个文件,压缩为一个文件),</span> 
-                        <span  id="upfileshow" style="color:#0AA20A"></span>  </br>
-                       
+                        <span  id="upfileshow" style="color:#0AA20A"></span>  </br>                       
                         <div class="form-item">
                             <div class="item-label">资源文件</div>
                             <div class="item-cont">
@@ -177,13 +172,11 @@
 
                 <textarea name="editor" id="editor" ng-model="editor" required></textarea>
                          
-
+                  
                 <span class="editor" id="editorBox" > 
-                  <input type="submit" class="btn btn-def" id="commentBtn" value="提交" style="margin-left: 588px; margin-top:1px; "/> 
+                <span><input type="submit" class="btn btn-def" id="commentBtn" value='提交' style="margin-left: 588px; margin-top:1px;" /></span>
                 </span>
             </form>
-
-         
 
         </div>
         <!-- main end -->
